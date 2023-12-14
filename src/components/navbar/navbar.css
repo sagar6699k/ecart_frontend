@@ -1,0 +1,49 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  /* background-color: rgb(242, 243, 233); */
+  background-color: #4b4b4b; 
+  margin: 0px;
+  padding: 0px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+.navbar > div {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  list-style-type: none;
+}
+.navbar > div:nth-child(2) {
+  padding: 0rem 2rem;
+}
+.navbar > div:nth-child(2) li {
+  background-color: rgb(44, 140, 44);
+  color: white;
+  display: flex;
+  align-items: center;
+  border-radius: 0.3rem;
+  padding: 0.2rem 0.7rem;
+}
+.logo {
+  font-size: 40px;
+  font-weight: 900;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 0rem 1rem;
+}
+li {
+  cursor: pointer;
+  color: whitesmoke;
+}
+.link {
+  text-decoration: none;
+  color: inherit; /* Optional: Inherit color from the parent */
+}
+
+.link:visited {
+  color: inherit; /* Optional: Inherit color for visited links */
+}

@@ -1,63 +1,78 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const initialFormData = {
-    login_id: "",
+    email: "",
     password: "",
   };
 
   const [formData, setFormData] = useState(initialFormData);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-const handleLogin = async (e) => {
+  const handleLogin = async (e) => {
+    console.log(formData);
     e.preventDefault();
 
     try {
-      const apiUrl = 'https://lobster-app-ddwng.ondigitalocean.app/user/login';
-      const apiKey = 'Z9Q7WKEY7ORGBUFGN3EG1QS5Y7FG8DU29GHKKSZH';
-      
-
+      const apiUrl = "https://ecartbackend-production.up.railway.app/login";
       const response = await axios.post(apiUrl, formData, {
         headers: {
-          'Content-Type': 'application/json',
-          'api_key': apiKey,
+          "Content-Type": "application/json",
         },
       });
 
-      if (response.data.status === true) {
-        console.log('User Login successfully', response.data);
-      } else {
-        console.error('Login failed', response.data.message);
-      }
+      localStorage.setItem("token", response.data.token)
+      localStorage.setItem("username", response.data.user.name)
+      alert("User Login successfully");
+      navigate("/dashboard");
+      console.log("User Login successfully", response.data);
+      setFormData(initialFormData);
     } catch (error) {
-      console.error('Error during Login:', error);
+      console.error("Error during Login:", error);
     }
   };
 
-
   return (
-    <div>
-      <form>
-        <div>
-          <label>Email: </label>
-          <input type="email" name="login_id" onChange={handleInputChange} />
+    <div className="h-screen">
+      <form className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Email
+          </label>
+          <input
+            className="w-full border rounded-md py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+            type="email"
+            name="email"
+            onChange={handleInputChange}
+          />
         </div>
-        <br />
-        <div>
-          <label>Password: </label>
-          <input type="password" name="password" onChange={handleInputChange} />
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Password
+          </label>
+          <input
+            className="w-full border rounded-md py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+            type="password"
+            name="password"
+            onChange={handleInputChange}
+          />
         </div>
-        <br />
-        <button onClick={handleLogin}>Submit</button>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          onClick={handleLogin}
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
 };
 
 export default Login;
- 

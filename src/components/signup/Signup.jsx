@@ -20,9 +20,7 @@ const Signup = () => {
   };
 
   const handleSignup = async (e) => {
-    console.log(formData);
     e.preventDefault();
-
     try {
       const apiUrl = "https://ecartbackend-production.up.railway.app/register";
       const response = await axios.post(apiUrl, formData, {
@@ -33,7 +31,6 @@ const Signup = () => {
 
       alert("User Login successfully");
       navigate("/login");
-      console.log("User registered successfully", response.data);
       setFormData(initialFormData);
     } catch (error) {
       console.error("Error during registration:", error);

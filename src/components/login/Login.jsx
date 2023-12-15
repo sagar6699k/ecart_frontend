@@ -17,9 +17,7 @@ const Login = () => {
   };
 
   const handleLogin = async (e) => {
-    console.log(formData);
     e.preventDefault();
-
     try {
       const apiUrl = "https://ecartbackend-production.up.railway.app/login";
       const response = await axios.post(apiUrl, formData, {
@@ -28,11 +26,11 @@ const Login = () => {
         },
       });
 
-      localStorage.setItem("token", response.data.token)
-      localStorage.setItem("username", response.data.user.name)
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("username", response.data.user.name);
       alert("User Login successfully");
       navigate("/dashboard");
-      console.log("User Login successfully", response.data);
+      // console.log("User Login successfully", response.data);
       setFormData(initialFormData);
     } catch (error) {
       console.error("Error during Login:", error);
